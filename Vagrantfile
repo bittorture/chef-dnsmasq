@@ -1,3 +1,6 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby : ts=2 : sw=2
+
 require 'berkshelf/vagrant'
 
 Vagrant::Config.run do |config|
@@ -69,7 +72,9 @@ Vagrant::Config.run do |config|
               ],
               :route => "33.33.33.2"
             }
-          ]
+          ],
+          'dhcp_interfaces' => [ 'eth1', 'eth2' ],
+          'dhcp_except_interfaces' => [ 'eth0' ]
         },
         'domain' => 'testlan',
         'dns' => {

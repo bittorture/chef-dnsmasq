@@ -2,6 +2,18 @@
 # from /etc/hosts or DHCP only.
 local=/<%= @domain %>/
 
+# Only listen for DHCP requests on the following interfaces
+<% @conf['dhcp_interfaces'].to_a.each do |interface| %>
+interface=<%= interface %>
+<% end %>
+
+# Alternatively, don't listen for DHCP requests on the following interfaces
+<% @conf['dhcp_except_interfaces'].to_a.each do |interface| %>
+except-interface=<%= interface %>
+<% end %>
+
+
+
 # Override the default route supplied by dnsmasq, which assumes the
 # router is the same machine as the one running dnsmasq.
 <%= "dhcp-option=option:router,#{@conf['default_route']}" if @conf['default_route'] %>
